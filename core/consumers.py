@@ -116,6 +116,7 @@ class MySyncConsumer3(SyncConsumer):
 
 
 class MyAsyncConsumer3(AsyncConsumer):
+    """This is a async consumer to demonstrate how async consumer works"""
     async def websocket_connect(self, event):
         print("async websocket connected")
         await self.send({
