@@ -4,6 +4,8 @@ Creating Consumers
 
 from channels.consumer import SyncConsumer, AsyncConsumer
 from channels.consumer import StopConsumer
+from time import sleep
+import asyncio
 
 
 class MySyncConsumer(SyncConsumer):
@@ -89,5 +91,47 @@ class MyAsyncConsumer2(AsyncConsumer):
     
     async def websocket_disconnect(self, event):
         print(f"++++Web socket disconnected++++:+++{event}")
+        raise StopConsumer()
+
+
+class MySyncConsumer3(SyncConsumer):
+    def websocket_connect(self, event):
+        print("websocket connected")
+        self.send({
+            "type":"websocket.accept"
+        })
+    
+    def websocket_receive(self, event):
+        print("Message recevied from the websocket", event['text'])
+        for i in range(50):
+            self.send({
+                "type":"websocket.send",
+                "text":str(i),
+            })
+            sleep(1)
+    
+    def websocket_disconnect(self, event):
+        print("websocket disconnected")
+        raise StopConsumer()
+
+
+class MyAsyncConsumer3(AsyncConsumer):
+    async def websocket_connect(self, event):
+        print("async websocket connected")
+        await self.send({
+            "type":"websocket.accept"
+        })
+    
+    async def websocket_receive(self, event):
+        print("Message received ", event['text'])
+        for i in range(50):
+            await self.send({
+                "type":"websocket.send",
+                "text": str(i),
+            })
+            await asyncio.sleep(1)
+    
+    async def websocket_disconnect(self, event):
+        print("websocket disconnected")
         raise StopConsumer()
     
