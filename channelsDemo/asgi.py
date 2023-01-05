@@ -15,11 +15,12 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 
 from core import routing
 
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'channelsDemo.settings')
 
 application = ProtocolTypeRouter({
     "http":get_asgi_application(),
     "websocket": URLRouter(
-        routing.websocket_urlpatterns
+        routing.websocket_urlpatterns,
     ),
 })

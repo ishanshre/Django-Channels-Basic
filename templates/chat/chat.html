@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Channels Chat APP</title>
+    <style>
+        * {
+            text-align: center;
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat app 1</h1>
+
+    <textarea id="chat-box" cols="100" rows="20"></textarea><br>
+    <input type="text" id="chat-message-input" size="100"><br>
+    <button type="submit" value="Send" id="chat-message-submit">send</button>
+
+    <script>
+        var ws = new WebSocket("ws://127.0.0.1:8000/ws/Schat1/")
+        ws.onopen = (event)=>{
+            console.log("web socket cconnnected...", event)
+        }
+        ws.onmessage = (event)=>{
+            data = JSON.parse(event.data)
+            console.log("Message received from serever...", data.msg)
+            document.querySelector("#chat-box").value += (data.msg + '\n')
+        }
+        ws.onerror = (event)=>{
+            console.log("Error occured with the websocket...", event)
+        }
+        ws.onclose = (event) =>{
+            console.log("websicket closed", event);
+        };
+        document.getElementById("chat-message-submit").onclick = (event) => {
+            const messageInoutDom = document.getElementById("chat-message-input");
+            const message = messageInoutDom.value
+            ws.send(JSON.stringify({
+                'msg':message
+            }))
+            messageInoutDom.value = ""
+        }
+    </script>
+</body>
+</html>
