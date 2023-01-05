@@ -16,6 +16,7 @@
 <body>
     <h1>Django Channels</h1>
     <h3>Count</h3>
+    <p id="count"></p>
     <script>
         //<!-- Create a websocket object that hits the backend server django channels -->
         var ws = new WebSocket("ws://127.0.0.1:8000/ws/sc3/")
@@ -47,7 +48,9 @@
             ws.send("Sending message to the server")
         })
         ws.addEventListener("message", (event)=>{
-            console.log("Message reveived from server...", event)
+            console.log("Message reveived from server...", event.data)
+            var data = JSON.parse(event.data)
+            document.getElementById("count").innerHTML = data.count
         })
         ws.addEventListener("error", (event)=>{
             console.log("an error occured...", event)

@@ -6,6 +6,7 @@ from channels.consumer import SyncConsumer, AsyncConsumer
 from channels.consumer import StopConsumer
 from time import sleep
 import asyncio
+import json
 
 
 class MySyncConsumer(SyncConsumer):
@@ -106,7 +107,7 @@ class MySyncConsumer3(SyncConsumer):
         for i in range(50):
             self.send({
                 "type":"websocket.send",
-                "text":str(i),
+                "text":json.dumps({'count':i}),
             })
             sleep(1)
     
