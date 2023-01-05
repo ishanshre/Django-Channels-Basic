@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("core.urls")),
     path("chat/", include("chatApp.urls")),
+    path("chat2/", include("chatApp2.urls")),
+    
 ]
