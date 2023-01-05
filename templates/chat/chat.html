@@ -21,11 +21,12 @@
     <button type="submit" value="Send" id="chat-message-submit">send</button>
 
     <script>
-        var ws = new WebSocket("ws://127.0.0.1:8000/ws/Schat1/")
+        var ws = new WebSocket("ws://127.0.0.1:8000/ws/Achat1/")
         ws.onopen = (event)=>{
             console.log("web socket cconnnected...", event)
         }
         ws.onmessage = (event)=>{
+            console.log(event.data)
             data = JSON.parse(event.data)
             console.log("Message received from serever...", data.msg)
             document.querySelector("#chat-box").value += (data.msg + '\n')

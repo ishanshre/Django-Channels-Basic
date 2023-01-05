@@ -14,4 +14,5 @@ websocket_urlpatterns = [
     
     # chatApp routing
     path("ws/Schat1/", chatApp_consumers.MySyncChatConsumer.as_asgi(), name="MySyncChatConsumer"),
+    path("ws/Achat1/", chatApp_consumers.MyAsyncChatConsumer.as_asgi(), name="AySyncChatConsumer"),
 ]
