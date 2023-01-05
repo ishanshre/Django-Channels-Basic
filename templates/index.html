@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Channels</title>
+    <style>
+        * {
+            text-align: center;
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Django Channels</h1>
+    <h3>Count</h3>
+    <script>
+        //<!-- Create a websocket object that hits the backend server django channels -->
+        var ws = new WebSocket("ws://127.0.0.1:8000/ws/sc3/")
+
+
+        /*
+        //Initialize the websocket connection with the backed also send the message to the server
+        ws.onopen = () => {
+            console.log("web socket connection open...")
+            ws.send("Message frrom client ...")
+        }
+        // It is invoked when server responds to the client
+        ws.onmessage = (event) => {
+            console.log("Message received from server...", event)
+        }
+        // It is invocked when error occurs
+        ws.onerror = (event) => {
+            console.log("Web socket error occured...", event)
+        }
+        // it is invoked when websoket conenction ends
+        ws.onclose = (event) => {
+            console.log("web socket closed...")
+        }
+        */
+        // Using addEventListner
+
+        ws.addEventListener("open", (event)=>{
+            console.log("Web socket connected ...", event)
+            ws.send("Sending message to the server")
+        })
+        ws.addEventListener("message", (event)=>{
+            console.log("Message reveived from server...", event)
+        })
+        ws.addEventListener("error", (event)=>{
+            console.log("an error occured...", event)
+        })
+        ws.addEventListener("close",(event)=>{
+            console.log("Web socket conn closed...". event)
+        })
+
+
+    </script>
+</body>
+</html>
