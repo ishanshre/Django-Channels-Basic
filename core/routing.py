@@ -4,6 +4,7 @@ from core import consumers
 from chatApp import consumers as chatApp_consumers
 from chatApp2 import consumers as chatApp_consumers2
 from chatApp3 import consumers as chatApp_consumers3
+from chatApp4 import consumers as chatApp_consumers4
 
 
 websocket_urlpatterns = [
@@ -22,4 +23,8 @@ websocket_urlpatterns = [
     # chatApp3 routing
     path("ws/Schat3/", chatApp_consumers3.MyGenericWebSocketConsumer.as_asgi(), name="MyGenricWebSocketConsumer"),
     path("ws/Achat3/", chatApp_consumers3.MyGenericAsyncWebSocketConsumer.as_asgi(), name="MyGenricAsyncWebSocketConsumer"),
+    
+    # chatApp 4 routing
+    path("ws/chat4Sync/", chatApp_consumers4.chat4SyncConsumer.as_asgi()),
+    path("ws/chat4Async/", chatApp_consumers4.chat4AsyncConsumer.as_asgi()),
 ]
