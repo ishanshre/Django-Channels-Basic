@@ -3,6 +3,7 @@ from django.urls import path
 from core import consumers
 from chatApp import consumers as chatApp_consumers
 from chatApp2 import consumers as chatApp_consumers2
+from chatApp3 import consumers as chatApp_consumers3
 
 
 websocket_urlpatterns = [
@@ -16,5 +17,9 @@ websocket_urlpatterns = [
     # chatApp routing
     path("ws/Schat1/", chatApp_consumers.MySyncChatConsumer.as_asgi(), name="MySyncChatConsumer"),
     path("ws/Achat1/", chatApp_consumers.MyAsyncChatConsumer.as_asgi(), name="AySyncChatConsumer"),
-    path("ws/Achat2/<str:groupName>/", chatApp_consumers2.MyDynamicGroupAsyncConsumer.as_asgi(), name="MyDynamicGroupAsyncConsumer")
+    path("ws/Achat2/<str:groupName>/", chatApp_consumers2.MyDynamicGroupAsyncConsumer.as_asgi(), name="MyDynamicGroupAsyncConsumer"),
+
+    # chatApp3 routing
+    path("ws/Schat3/", chatApp_consumers3.MyGenericWebSocketConsumer.as_asgi(), name="MyGenricWebSocketConsumer"),
+    path("ws/Achat3/", chatApp_consumers3.MyGenericAsyncWebSocketConsumer.as_asgi(), name="MyGenricAsyncWebSocketConsumer"),
 ]
