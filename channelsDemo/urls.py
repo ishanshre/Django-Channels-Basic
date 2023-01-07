@@ -22,5 +22,6 @@ urlpatterns = [
     path("chat/", include("chatApp.urls")),
     path("chat2/", include("chatApp2.urls")),
     path("chat4/", include("chatApp4.urls")),
+    path("chat5/", include("chatApp5.urls")),
     
 ]

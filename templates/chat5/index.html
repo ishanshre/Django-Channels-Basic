@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App 5</title>
+    <style>
+        * {
+            text-align: center;
+            margin: 2px;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to chat app v5</h1>
+    <p>Group Name: {{ groupName }}</p>
+    <textarea id="chat-box" cols="30" rows="10">
+        {% for chat in chats %}
+        {{ chat.content }}
+        {% endfor %}
+    </textarea><br>
+    <input type="text" id="chat-msg"><br>
+    <input type="button" value="send" id="chat-btn"><br>
+    {{ groupName|json_script:"groupName"}}
+    <script>
+        group_name = JSON.parse(document.getElementById("groupName").textContent)
+        console.log(groupName)
+        url = "ws://"+window.location.host+"/ws/chat5Async/"+group_name+"/"
+        var ws = new WebSocket(url)
+        ws.onopen = (event)=> {
+            console.log("web socket connected...", event)
+        }
+        ws.onmessage = (event) => {
+            console.log("message received...", event)
+            console.log('actual data:', typeof(event.data))
+            data = JSON.parse(event.data)
+            document.querySelector("#chat-box").value += data.username+": "+data.msg+"\n"
+        }
+        ws.onerror = (event) => {
+            console.log("error occoredxc", event)
+        }
+        ws.onclose = (event) => {
+            console.log("web socket connection closed")
+        }
+        document.getElementById("chat-btn").onclick = (event) => {
+            const messageInputDom = document.getElementById("chat-msg")
+            const message = messageInputDom.value
+            console.log(message)
+            ws.send(
+                JSON.stringify({
+                    "msg":message
+                })
+            )
+            messageInputDom.value = ""
+        }
+    </script>
+</body>
+</html>

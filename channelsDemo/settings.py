@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'chatApp2.apps.Chatapp2Config',
     'chatApp3.apps.Chatapp3Config',
     'chatApp4.apps.Chatapp4Config',
+    'chatApp5.apps.Chatapp5Config',
 ]
 
 MIDDLEWARE = [
