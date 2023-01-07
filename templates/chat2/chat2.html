@@ -30,7 +30,8 @@
             console.log(event.data)
             data = JSON.parse(event.data)
             console.log("Message received from server...", data.msg)
-            document.querySelector("#chat-box").value += (data.msg + '\n')
+            console.log("username:", data.user)
+            document.querySelector("#chat-box").value += (data.user+" : "+data.msg + '\n')
         }
         ws.onerror = (event)=>{
             console.log("error occured with the websocket...", event)
