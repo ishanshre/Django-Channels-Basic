@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
 from chatApp6.models import Group
+
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 # Create your views here.
 def chat6Index(request, groupName):
@@ -16,3 +19,15 @@ def chat6Index(request, groupName):
         "chats":chats
     }
     return render(request, "chat6/index.html", context)
+
+
+def sendMsgFromOutside(request):
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        "hello",
+        {
+            "type":"chat.message",
+            "message":"Message from outside the consiumer"
+        }
+    )
+    return HttpResponse("Message from Outside")
