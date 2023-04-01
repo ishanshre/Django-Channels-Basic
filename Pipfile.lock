@@ -137,7 +137,7 @@
                 "sha256:81b59d68f53313e1aa891f23591841b684abb936b42e4d1a966d9e4dc63a95ec"
             ],
             "index": "pypi",
-            "version": "==4.0.0"
+            "version": "==4.1.0"
         },
         "constantly": {
             "hashes": [
@@ -189,7 +189,7 @@
                 "sha256:ff56ebd7ead0fd5dbe06fe157b0024a7aaea2e0593bb3785fb594cf94dad58ef"
             ],
             "index": "pypi",
-            "version": "==4.1.5"
+            "version": "==4.1.7"
         },
         "hyperlink": {
             "hashes": [
@@ -325,7 +325,7 @@
                 "sha256:cae3ee5d1f57d8caf534cd8764edf3163c77e073bdd74b6f54a87ffafdc5e7d9"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==4.4.0"
+            "version": "==4.4.4"
         },
         "service-identity": {
             "hashes": [
